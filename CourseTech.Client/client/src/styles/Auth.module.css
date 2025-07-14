@@ -1,0 +1,60 @@
+.passwordRequirements {
+  margin-top: 0.5rem;
+  padding: 1rem;
+  background-color: #f8fafc;
+  border-radius: 8px;
+  border: 1px solid #e2e8f0;
+}
+
+.requirementTitle {
+  font-size: 0.9rem;
+  color: #4a5568;
+  margin-bottom: 0.5rem;
+  font-weight: 500;
+}
+
+.passwordRequirements ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.passwordRequirements li {
+  font-size: 0.85rem;
+  margin-bottom: 0.25rem;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.passwordRequirements li::before {
+  content: '';
+  width: 16px;
+  height: 16px;
+  border-radius: 50%;
+  display: inline-block;
+}
+
+.valid {
+  color: #2f855a;
+}
+
+.valid::before {
+  background-color: #c6f6d5;
+  border: 2px solid #48bb78;
+}
+
+.invalid {
+  color: #9b2c2c;
+}
+
+.invalid::before {
+  background-color: #fed7d7;
+  border: 2px solid #e53e3e;
+}
+
+.errorText {
+  color: #e53e3e;
+  font-size: 0.85rem;
+  margin-top: 0.25rem;
+} 

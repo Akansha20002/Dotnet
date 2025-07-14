@@ -1,0 +1,262 @@
+.navbar {
+  background-color: white;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  position: sticky;
+  top: 0;
+  z-index: 1000;
+}
+
+.navContainer {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 1rem 2rem;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.logo {
+  font-size: 1.5rem;
+  font-weight: bold;
+  color: #007bff;
+  text-decoration: none;
+  transition: color 0.3s ease;
+}
+
+.logo:hover {
+  color: #3182ce;
+}
+
+.menuButton {
+  display: none;
+  background: none;
+  border: none;
+  font-size: 1.5rem;
+  color: #4a5568;
+  cursor: pointer;
+  padding: 0.5rem;
+}
+
+.navLinks {
+  display: flex;
+  align-items: center;
+  gap: 2rem;
+}
+
+.navLink {
+  color: #333;
+  text-decoration: none;
+  font-weight: 500;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  transition: color 0.3s ease;
+  padding: 0.5rem;
+  border-radius: 8px;
+}
+
+.navLink:hover {
+  color: #4299e1;
+  background-color: #ebf8ff;
+}
+
+.navLink svg {
+  font-size: 1.2rem;
+}
+
+.profileWrapper {
+  position: relative;
+}
+
+.profileButton {
+  background: none;
+  border: none;
+  padding: 0;
+  cursor: pointer;
+  transition: transform 0.2s ease;
+}
+
+.profileButton:hover {
+  transform: scale(1.05);
+}
+
+.initialsCircle {
+  width: 36px;
+  height: 36px;
+  background-color: #4299e1;
+  color: white;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: 600;
+  font-size: 0.9rem;
+  text-transform: uppercase;
+  transition: all 0.3s ease;
+}
+
+.initialsCircle:hover {
+  background-color: #3182ce;
+}
+
+.profileDropdown {
+  position: absolute;
+  top: 100%;
+  right: 0;
+  width: 240px;
+  background: white;
+  border-radius: 12px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  padding: 1rem;
+  margin-top: 0.5rem;
+  z-index: 1000;
+}
+
+.profileInfo {
+  padding: 0.5rem;
+}
+
+.userName {
+  display: block;
+  font-weight: 600;
+  color: #1e293b;
+  font-size: 1rem;
+  margin-bottom: 0.25rem;
+}
+
+.userEmail {
+  display: block;
+  color: #64748b;
+  font-size: 0.9rem;
+}
+
+.dropdownDivider {
+  height: 1px;
+  background: #e2e8f0;
+  margin: 0.5rem 0;
+}
+
+.dropdownItem {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  padding: 0.75rem;
+  width: 100%;
+  border: none;
+  background: none;
+  color: #4a5568;
+  font-size: 0.95rem;
+  cursor: pointer;
+  border-radius: 8px;
+  text-decoration: none;
+  transition: all 0.2s ease;
+}
+
+.dropdownItem:hover {
+  background: #f1f5f9;
+  color: #3182ce;
+}
+
+.dropdownIcon {
+  font-size: 1.1rem;
+  color: #64748b;
+  transition: color 0.2s ease;
+}
+
+.dropdownItem:hover .dropdownIcon {
+  color: #3182ce;
+}
+
+.authButtons {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+}
+
+.loginButton, .registerButton {
+  padding: 0.5rem 1rem;
+  border-radius: 8px;
+  font-weight: 500;
+  text-decoration: none;
+  transition: all 0.3s ease;
+}
+
+.loginButton {
+  color: #4299e1;
+  border: 2px solid #4299e1;
+}
+
+.loginButton:hover {
+  background-color: #4299e1;
+  color: white;
+}
+
+.registerButton {
+  background-color: #4299e1;
+  color: white;
+  border: 2px solid transparent;
+}
+
+.registerButton:hover {
+  background-color: #3182ce;
+  transform: translateY(-1px);
+}
+
+@media (max-width: 768px) {
+  .menuButton {
+    display: block;
+  }
+
+  .navLinks {
+    display: none;
+    position: absolute;
+    top: 100%;
+    left: 0;
+    right: 0;
+    background-color: white;
+    padding: 1rem;
+    flex-direction: column;
+    align-items: flex-start;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  }
+
+  .navLinks.active {
+    display: flex;
+  }
+
+  .profileWrapper {
+    width: 100%;
+  }
+
+  .profileButton {
+    width: 100%;
+    padding: 0.5rem;
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+  }
+
+  .initialsCircle {
+    width: 32px;
+    height: 32px;
+    font-size: 0.85rem;
+  }
+
+  .profileDropdown {
+    position: static;
+    box-shadow: none;
+    margin-top: 0.5rem;
+    width: 100%;
+  }
+
+  .authButtons {
+    width: 100%;
+    flex-direction: column;
+    gap: 0.5rem;
+  }
+
+  .loginButton, .registerButton {
+    width: 100%;
+    text-align: center;
+  }
+} 

@@ -1,0 +1,413 @@
+.container {
+  padding: 2rem;
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.header {
+  margin-bottom: 2rem;
+  text-align: left;
+  position: relative;
+  padding: 2rem;
+  border-radius: 15px;
+  background: linear-gradient(135deg, #2563eb, #1d4ed8);
+  color: white;
+  box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+}
+
+.header h1 {
+  font-size: 2.5rem;
+  font-weight: 700;
+  margin-bottom: 0.5rem;
+  background: linear-gradient(to right, #ffffff, #e2e8f0);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+}
+
+.header p {
+  font-size: 1.1rem;
+  color: #e2e8f0;
+  max-width: 600px;
+}
+
+.searchSection {
+  display: flex;
+  gap: 1rem;
+  margin-bottom: 1.5rem;
+  align-items: center;
+}
+
+.searchBar {
+  flex: 1;
+  position: relative;
+  max-width: 600px;
+}
+
+.searchIcon {
+  position: absolute;
+  left: 1rem;
+  top: 50%;
+  transform: translateY(-50%);
+  color: #6b7280;
+  width: 1.25rem;
+  height: 1.25rem;
+}
+
+.searchInput {
+  width: 100%;
+  padding: 0.75rem 1rem 0.75rem 2.75rem;
+  border: 1px solid #e5e7eb;
+  border-radius: 8px;
+  font-size: 1rem;
+  outline: none;
+  transition: all 0.2s;
+}
+
+.searchInput:focus {
+  border-color: #2563eb;
+  box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.1);
+}
+
+.filterButton {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.75rem 1.25rem;
+  background-color: white;
+  border: 1px solid #e5e7eb;
+  border-radius: 8px;
+  color: #4b5563;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all 0.2s;
+}
+
+.filterButton:hover {
+  background-color: #f9fafb;
+  border-color: #d1d5db;
+}
+
+.filterButton svg {
+  width: 1.25rem;
+  height: 1.25rem;
+}
+
+.filterSection {
+  background-color: white;
+  border: 1px solid #e5e7eb;
+  border-radius: 8px;
+  padding: 1rem;
+  margin-bottom: 2rem;
+  animation: slideDown 0.2s ease-out;
+}
+
+.filterGroup {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+}
+
+.filterGroup label {
+  font-weight: 500;
+  color: #4b5563;
+  min-width: 60px;
+}
+
+.filterSelect {
+  padding: 0.5rem 2rem 0.5rem 0.75rem;
+  border: 1px solid #e5e7eb;
+  border-radius: 6px;
+  background-color: white;
+  color: #1f2937;
+  font-size: 0.875rem;
+  cursor: pointer;
+  outline: none;
+  transition: all 0.2s;
+}
+
+.filterSelect:focus {
+  border-color: #2563eb;
+  box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.1);
+}
+
+.noResults {
+  text-align: center;
+  padding: 4rem 2rem;
+  color: #6b7280;
+  background-color: white;
+  border-radius: 12px;
+  border: 1px solid #e5e7eb;
+}
+
+.noResults svg {
+  color: #9ca3af;
+  margin-bottom: 1rem;
+}
+
+.noResults h3 {
+  font-size: 1.25rem;
+  font-weight: 600;
+  color: #374151;
+  margin-bottom: 0.5rem;
+}
+
+.noResults p {
+  color: #6b7280;
+}
+
+@keyframes slideDown {
+  from {
+    opacity: 0;
+    transform: translateY(-10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.courseGrid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+  gap: 2rem;
+  margin-top: 2rem;
+}
+
+.courseCard {
+  background: white;
+  border-radius: 12px;
+  overflow: hidden;
+  transition: transform 0.2s, box-shadow 0.2s;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+  border: 1px solid #e5e7eb;
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+}
+
+.courseCard:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 12px 20px rgba(0, 0, 0, 0.1);
+}
+
+.courseImage {
+  width: 100%;
+  height: 180px;
+  overflow: hidden;
+}
+
+.courseImage img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 0.3s ease;
+}
+
+.courseCard:hover .courseImage img {
+  transform: scale(1.05);
+}
+
+.courseContent {
+  padding: 1.5rem;
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+}
+
+.courseHeader {
+  margin-bottom: 1rem;
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  gap: 1rem;
+}
+
+.courseHeader h3 {
+  font-size: 1.25rem;
+  font-weight: 600;
+  color: #1f2937;
+  margin-bottom: 0;
+  line-height: 1.4;
+  flex: 1;
+}
+
+.category {
+  display: inline-flex;
+  align-items: center;
+  padding: 0.25rem 0.75rem;
+  background-color: #EEF2FF;
+  color: #4F46E5;
+  border-radius: 9999px;
+  font-size: 0.75rem;
+  font-weight: 600;
+  white-space: nowrap;
+  border: 1px solid #E0E7FF;
+  transition: all 0.2s;
+}
+
+/* Kategori renkleri */
+.categoryProgramming {
+  background-color: #EEF2FF;
+  color: #4F46E5;
+  border-color: #E0E7FF;
+}
+
+.categoryDesign {
+  background-color: #FEF2F2;
+  color: #DC2626;
+  border-color: #FEE2E2;
+}
+
+.categoryBusiness {
+  background-color: #ECFDF5;
+  color: #059669;
+  border-color: #D1FAE5;
+}
+
+.categoryMarketing {
+  background-color: #FFF7ED;
+  color: #EA580C;
+  border-color: #FFEDD5;
+}
+
+.categoryPhotography {
+  background-color: #F5F3FF;
+  color: #7C3AED;
+  border-color: #EDE9FE;
+}
+
+.categoryMusic {
+  background-color: #FDF2F8;
+  color: #DB2777;
+  border-color: #FCE7F3;
+}
+
+.categoryLanguage {
+  background-color: #F0FDF4;
+  color: #16A34A;
+  border-color: #DCFCE7;
+}
+
+.categoryHealth {
+  background-color: #EFF6FF;
+  color: #2563EB;
+  border-color: #DBEAFE;
+}
+
+.instructor {
+  color: #6b7280;
+  font-size: 0.875rem;
+  margin-bottom: 1rem;
+}
+
+.courseInfo {
+  display: flex;
+  gap: 1rem;
+  margin-bottom: 1.5rem;
+  flex-wrap: wrap;
+}
+
+.infoItem {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  color: #6b7280;
+  font-size: 0.875rem;
+}
+
+.infoItem svg {
+  width: 1rem;
+  height: 1rem;
+}
+
+.continueButton {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  padding: 0.75rem;
+  background-color: #2563eb;
+  color: white;
+  border: none;
+  border-radius: 8px;
+  font-weight: 500;
+  cursor: default;
+  transition: background-color 0.2s;
+  margin-top: auto;
+  opacity: 0.8;
+}
+
+.continueButton:hover {
+  background-color: #1d4ed8;
+}
+
+.continueButton svg {
+  width: 1.25rem;
+  height: 1.25rem;
+}
+
+.empty {
+  text-align: center;
+  padding: 4rem 2rem;
+  color: #6b7280;
+}
+
+.empty svg {
+  color: #9ca3af;
+  margin-bottom: 1rem;
+}
+
+.empty h2 {
+  font-size: 1.5rem;
+  font-weight: 600;
+  color: #374151;
+  margin-bottom: 0.5rem;
+}
+
+.empty p {
+  margin-bottom: 1.5rem;
+}
+
+.browseCourses {
+  display: inline-flex;
+  align-items: center;
+  padding: 0.75rem 1.5rem;
+  background-color: #2563eb;
+  color: white;
+  border: none;
+  border-radius: 8px;
+  font-weight: 500;
+  cursor: pointer;
+  transition: background-color 0.2s;
+}
+
+.browseCourses:hover {
+  background-color: #1d4ed8;
+}
+
+.loading {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  min-height: 400px;
+  color: #6b7280;
+  gap: 1rem;
+}
+
+.loadingIcon {
+  animation: spin 1s linear infinite;
+  width: 2rem;
+  height: 2rem;
+}
+
+@keyframes spin {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+} 

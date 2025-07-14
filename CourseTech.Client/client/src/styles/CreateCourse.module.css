@@ -1,0 +1,370 @@
+.container {
+  max-width: 900px;
+  margin: 2rem auto;
+  padding: 0 2rem;
+}
+
+.header {
+  display: flex;
+  align-items: center;
+  gap: 1.5rem;
+  margin-bottom: 2.5rem;
+}
+
+.header h1 {
+  font-size: 2rem;
+  color: #2d3748;
+  font-weight: 600;
+  margin: 0;
+}
+
+.backButton {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.625rem 1rem;
+  color: #4a5568;
+  font-size: 0.9375rem;
+  border-radius: 6px;
+  border: 1px solid #e2e8f0;
+  background-color: white;
+  transition: all 0.2s ease;
+}
+
+.backButton:hover {
+  background-color: #f7fafc;
+  border-color: #cbd5e0;
+  color: #2d3748;
+  transform: translateX(-2px);
+}
+
+.stepIndicator {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 3rem;
+  position: relative;
+}
+
+.stepIndicator::before {
+  content: '';
+  position: absolute;
+  top: 24px;
+  left: 0;
+  right: 0;
+  height: 2px;
+  background: #e2e8f0;
+  z-index: 1;
+}
+
+.step {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.5rem;
+  position: relative;
+  z-index: 2;
+  flex: 1;
+}
+
+.stepNumber {
+  width: 48px;
+  height: 48px;
+  border-radius: 50%;
+  background: white;
+  border: 2px solid #e2e8f0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: 600;
+  color: #4a5568;
+  font-size: 1.125rem;
+  transition: all 0.3s ease;
+}
+
+.stepTitle {
+  font-size: 0.875rem;
+  color: #4a5568;
+  font-weight: 500;
+  text-align: center;
+}
+
+.step.active .stepNumber {
+  background: #4299e1;
+  border-color: #4299e1;
+  color: white;
+}
+
+.step.active .stepTitle {
+  color: #2d3748;
+  font-weight: 600;
+}
+
+.form {
+  background: white;
+  padding: 2.5rem;
+  border-radius: 12px;
+  box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+}
+
+.formGroup {
+  margin-bottom: 2rem;
+}
+
+.formGroup label {
+  display: block;
+  margin-bottom: 0.75rem;
+  font-weight: 600;
+  color: #2d3748;
+  font-size: 0.9375rem;
+}
+
+.formGroup input,
+.formGroup textarea,
+.formGroup select {
+  width: 100%;
+  padding: 0.875rem 1.25rem;
+  font-size: 1rem;
+  border: 2px solid #e2e8f0;
+  border-radius: 8px;
+  transition: all 0.2s ease;
+  color: #2d3748;
+  background-color: #fff;
+}
+
+.formGroup input:hover,
+.formGroup textarea:hover,
+.formGroup select:hover {
+  border-color: #cbd5e0;
+}
+
+.formGroup input:focus,
+.formGroup textarea:focus,
+.formGroup select:focus {
+  border-color: #4299e1;
+  box-shadow: 0 0 0 3px rgba(66, 153, 225, 0.15);
+  outline: none;
+}
+
+.formGroup input::placeholder,
+.formGroup textarea::placeholder {
+  color: #a0aec0;
+}
+
+.formRow {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 2rem;
+  margin-bottom: 2rem;
+}
+
+.formActions {
+  display: flex;
+  justify-content: flex-end;
+  gap: 1.25rem;
+  margin-top: 3rem;
+  padding-top: 2rem;
+  border-top: 2px solid #f7fafc;
+}
+
+.prevButton,
+.nextButton,
+.submitButton {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.875rem 2rem;
+  border-radius: 8px;
+  font-weight: 600;
+  font-size: 1rem;
+  transition: all 0.2s ease;
+}
+
+.prevButton {
+  background-color: #fff;
+  border: 2px solid #e2e8f0;
+  color: #4a5568;
+}
+
+.prevButton:hover {
+  background-color: #f7fafc;
+  border-color: #cbd5e0;
+  color: #2d3748;
+  transform: translateX(-2px);
+}
+
+.nextButton {
+  background-color: #4299e1;
+  border: none;
+  color: white;
+}
+
+.nextButton:hover:not(:disabled) {
+  background-color: #3182ce;
+  transform: translateX(2px);
+  box-shadow: 0 4px 6px -1px rgba(66, 153, 225, 0.2);
+}
+
+.submitButton {
+  background-color: #48bb78;
+  border: none;
+  color: white;
+}
+
+.submitButton:hover:not(:disabled) {
+  background-color: #38a169;
+  transform: translateY(-1px);
+  box-shadow: 0 4px 6px -1px rgba(72, 187, 120, 0.2);
+}
+
+.nextButton:disabled,
+.submitButton:disabled {
+  opacity: 0.7;
+  cursor: not-allowed;
+  transform: none;
+  box-shadow: none;
+}
+
+.timePicker {
+  width: 100%;
+}
+
+.timePicker > div {
+  width: 100%;
+}
+
+.timePicker input {
+  width: 100%;
+  padding: 0.875rem 1.25rem;
+  font-size: 1rem;
+  border: 2px solid #e2e8f0;
+  border-radius: 8px;
+  color: #2d3748;
+  background-color: #fff;
+  transition: all 0.2s ease;
+}
+
+.timePicker input:hover {
+  border-color: #cbd5e0;
+}
+
+.timePicker input:focus {
+  border-color: #4299e1;
+  box-shadow: 0 0 0 3px rgba(66, 153, 225, 0.15);
+  outline: none;
+}
+
+.timePicker fieldset {
+  border: none !important;
+}
+
+.timePicker svg {
+  color: #4a5568;
+}
+
+@media (max-width: 768px) {
+  .container {
+    margin: 1rem auto;
+    padding: 0 1rem;
+  }
+  
+  .form {
+    padding: 1.5rem;
+  }
+  
+  .formRow {
+    grid-template-columns: 1fr;
+    gap: 1.5rem;
+  }
+  
+  .header {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 1rem;
+  }
+  
+  .formActions {
+    flex-direction: column-reverse;
+    gap: 1rem;
+  }
+  
+  .prevButton,
+  .nextButton,
+  .submitButton {
+    width: 100%;
+    justify-content: center;
+  }
+
+  .stepIndicator {
+    margin-bottom: 2rem;
+  }
+
+  .stepTitle {
+    font-size: 0.75rem;
+  }
+
+  .stepNumber {
+    width: 40px;
+    height: 40px;
+    font-size: 1rem;
+  }
+}
+
+.inputError {
+  border-color: #e53e3e !important;
+}
+
+.inputError:hover {
+  border-color: #c53030 !important;
+}
+
+.inputError:focus {
+  border-color: #e53e3e !important;
+  box-shadow: 0 0 0 3px rgba(229, 62, 62, 0.15) !important;
+}
+
+.errorMessage {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  margin-top: 0.5rem;
+  color: #e53e3e;
+  font-size: 0.875rem;
+}
+
+.errorMessage svg {
+  flex-shrink: 0;
+  width: 16px;
+  height: 16px;
+}
+
+.submitError {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  margin-bottom: 1.5rem;
+  padding: 1rem;
+  background-color: #fff5f5;
+  border: 1px solid #fed7d7;
+  border-radius: 8px;
+  color: #c53030;
+}
+
+.submitError svg {
+  flex-shrink: 0;
+  width: 20px;
+  height: 20px;
+}
+
+.inputSuccess {
+  border-color: #48bb78 !important;
+  background-color: #f0fff4 !important;
+}
+
+.inputSuccess:hover {
+  border-color: #38a169 !important;
+}
+
+.inputSuccess:focus {
+  border-color: #48bb78 !important;
+  box-shadow: 0 0 0 3px rgba(72, 187, 120, 0.15) !important;
+} 

@@ -1,0 +1,143 @@
+.modalOverlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: rgba(0, 0, 0, 0.5);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 1000;
+  animation: fadeIn 0.2s ease-out;
+}
+
+.modal {
+  background: white;
+  border-radius: 12px;
+  padding: 2rem;
+  width: 90%;
+  max-width: 500px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1), 0 1px 3px rgba(0, 0, 0, 0.08);
+  animation: slideUp 0.3s ease-out;
+}
+
+.modalHeader {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  margin-bottom: 1.5rem;
+}
+
+.modalHeader h2 {
+  color: #1e293b;
+  margin: 0;
+  font-size: 1.5rem;
+  font-weight: 600;
+}
+
+.warningIcon {
+  font-size: 2rem;
+  color: #e53e3e;
+}
+
+.modalContent {
+  margin-bottom: 2rem;
+}
+
+.modalContent p {
+  color: #4a5568;
+  margin-bottom: 1rem;
+  font-size: 1rem;
+  line-height: 1.5;
+}
+
+.modalContent ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.modalContent li {
+  color: #4a5568;
+  padding: 0.5rem 0;
+  padding-left: 1.5rem;
+  position: relative;
+}
+
+.modalContent li::before {
+  content: "•";
+  color: #e53e3e;
+  position: absolute;
+  left: 0;
+  font-weight: bold;
+}
+
+.modalActions {
+  display: flex;
+  justify-content: flex-end;
+  gap: 1rem;
+  margin-top: 2rem;
+}
+
+.cancelButton, .deleteButton {
+  padding: 0.75rem 1.5rem;
+  border-radius: 8px;
+  font-weight: 500;
+  font-size: 0.95rem;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.cancelButton {
+  background: white;
+  color: #4a5568;
+  border: 2px solid #e2e8f0;
+}
+
+.cancelButton:hover {
+  background: #f7fafc;
+  border-color: #cbd5e0;
+}
+
+.cancelButton:disabled {
+  background: #f1f5f9;
+  border-color: #e2e8f0;
+  color: #a0aec0;
+  cursor: not-allowed;
+}
+
+.deleteButton {
+  background: #e53e3e;
+  color: white;
+  border: none;
+}
+
+.deleteButton:hover {
+  background: #c53030;
+}
+
+.deleteButton:disabled {
+  background: #fc8181;
+  cursor: not-allowed;
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+@keyframes slideUp {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+} 
