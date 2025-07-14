@@ -15,11 +15,12 @@ namespace CourseTech.API.Controllers
             var result = await service.CreateOrderFromBasketAsync(basketId);
             return CreateActionResult(result);
         }
-
         [HttpGet("{orderId:guid}")]
         public async Task<IActionResult> GetOrderById(Guid orderId)
         {
             var result = await service.GetOrderByIdAsync(orderId);
+            if (result == null)
+                return BadRequest("Order not found");
             return CreateActionResult(result);
         }
 
