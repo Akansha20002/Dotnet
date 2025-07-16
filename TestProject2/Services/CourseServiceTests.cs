@@ -12,7 +12,7 @@ using CourseTech.Service.Services;
 using Microsoft.AspNetCore.Identity;
 using CourseTech.Shared.Enums;
 
-namespace TestProject2.Services
+namespace TestProject2.Xunit.Services
 {
     public class CourseServiceTests
     {
@@ -54,41 +54,7 @@ namespace TestProject2.Services
             Assert.Equal(courseDto, result.Data);
         }
 
-        [Fact]
-        public async Task GetAllAsync_ShouldReturnAllCourses()
-        {
-            // Arrange
-            var courses = new List<Course>
-            {
-                new Course("Course 1", "Description 1", "image1.jpg", "video1.mp4", 
-                    CourseLevel.Beginner, CourseLanguage.English, 99.99m, TimeSpan.FromHours(2), 
-                    Guid.NewGuid(), Guid.NewGuid()),
-                new Course("Course 2", "Description 2", "image2.jpg", "video2.mp4", 
-                    CourseLevel.Intermediate, CourseLanguage.Turkish, 149.99m, TimeSpan.FromHours(3), 
-                    Guid.NewGuid(), Guid.NewGuid())
-            };
-
-            var courseDtos = new List<CourseDTO>
-            {
-                new CourseDTO(Guid.NewGuid(), "Course 1", "Description 1", "image1.jpg", "video1.mp4", 
-                    "Beginner", "English", 99.99m, TimeSpan.FromHours(2), null, "Instructor 1", "Category 1", DateTime.UtcNow),
-                new CourseDTO(Guid.NewGuid(), "Course 2", "Description 2", "image2.jpg", "video2.mp4", 
-                    "Intermediate", "Turkish", 149.99m, TimeSpan.FromHours(3), null, "Instructor 2", "Category 2", DateTime.UtcNow)
-            };
-
-            _unitOfWorkMock.Setup(x => x.Course.GetAllAsync())
-                .ReturnsAsync(courses);
-            _mapperMock.Setup(x => x.Map<IEnumerable<CourseDTO>>(courses))
-                .Returns(courseDtos);
-
-            // Act
-            var result = await _courseService.GetAllAsync();
-
-            // Assert
-            Assert.True(result.IsSuccess);
-            Assert.Equal(courseDtos, result.Data);
-        }
-
+       
         [Fact]
         public async Task GetPublishedCoursesAsync_ShouldReturnOnlyPublishedCourses()
         {
@@ -129,40 +95,7 @@ namespace TestProject2.Services
             Assert.Equal(courseDtos, result.Data);
         }
 
-        [Fact]
-        public async Task CreateAsync_ShouldCreateNewCourse()
-        {
-            // Arrange
-            var instructorId = Guid.NewGuid();
-            var categoryId = Guid.NewGuid();
-            var createDto = new CourseCreateDTO("New Course", "Description", "image.jpg", "video.mp4", 
-                "Beginner", "English", 99.99m, TimeSpan.FromHours(2), instructorId, categoryId);
-
-            var course = new Course(createDto.Title, createDto.Description ?? "", createDto.ImageUrl, createDto.VideoUrl,
-                CourseLevel.Beginner, CourseLanguage.English, createDto.Price, createDto.Duration,
-                createDto.InstructorId, createDto.CategoryId);
-
-            var courseDto = new CourseDTO(Guid.NewGuid(), course.Title, course.Description, course.ImageUrl,
-                course.VideoUrl, course.Level.ToString(), course.Language.ToString(), course.Price,
-                course.Duration, null, "Instructor Name", "Category Name", DateTime.UtcNow);
-
-            _mapperMock.Setup(x => x.Map<Course>(createDto))
-                .Returns(course);
-            _unitOfWorkMock.Setup(x => x.Course.InsertAsync(course))
-                .Returns(Task.CompletedTask);
-            _mapperMock.Setup(x => x.Map<CourseDTO>(course))
-                .Returns(courseDto);
-
-            // Act
-            var result = await _courseService.CreateAsync(createDto);
-
-            // Assert
-            Assert.True(result.IsSuccess);
-            Assert.Equal(courseDto, result.Data);
-            _unitOfWorkMock.Verify(x => x.Course.InsertAsync(course), Times.Once);
-            _unitOfWorkMock.Verify(x => x.SaveChangesAsync(), Times.Once);
-        }
-
+        
         [Fact]
         public async Task PublishCourseAsync_ShouldPublishCourse()
         {

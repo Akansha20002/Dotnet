@@ -12,7 +12,7 @@ using CourseTech.Service.Services;
 using CourseTech.Core.Repositories;
 using CourseTech.Shared;
 
-namespace TestProject2.Services
+namespace TestProject2.Xunit.Services
 {
     public class BasketServiceTests
     {
@@ -22,6 +22,9 @@ namespace TestProject2.Services
         private readonly Mock<IMapper> _mapperMock = new();
         private readonly BasketService _basketService;
 
+        private const string CourseNotFoundMessage = "Course not found";
+        private const string BasketNotFoundMessage = "Basket not found";
+
         public BasketServiceTests()
         {
             _unitOfWorkMock.Setup(u => u.Basket).Returns(_basketRepoMock.Object);
@@ -29,8 +32,8 @@ namespace TestProject2.Services
             _basketService = new BasketService(_unitOfWorkMock.Object, _mapperMock.Object);
         }
 
-        [Fact]
-        public async Task GetActiveBasketAsync_ShouldReturnExistingBasket()
+        [Fact, Trait("Method", "GetActiveBasketAsync")]
+        public async Task GetActiveBasketAsync_WhenBasketExists_ShouldReturnBasketDTO()
         {
             var userId = Guid.NewGuid();
             var basket = new Basket(userId);
@@ -45,8 +48,8 @@ namespace TestProject2.Services
             Assert.NotNull(result.Data);
         }
 
-        [Fact]
-        public async Task GetActiveBasketAsync_ShouldCreateBasket_IfNotExists()
+        [Fact, Trait("Method", "GetActiveBasketAsync")]
+        public async Task GetActiveBasketAsync_WhenBasketNotFound_ShouldCreateNewBasket()
         {
             var userId = Guid.NewGuid();
             var basketDto = new BasketDTO(Guid.NewGuid(), userId, new List<BasketItemDTO>(), "Active", 0);
@@ -61,8 +64,8 @@ namespace TestProject2.Services
             _unitOfWorkMock.Verify(u => u.SaveChangesAsync(), Times.Once);
         }
 
-        [Fact]
-        public async Task AddCourseToBasketAsync_ShouldFail_IfCourseNotFound()
+        [Fact, Trait("Method", "AddCourseToBasketAsync")]
+        public async Task AddCourseToBasketAsync_WhenCourseMissing_ShouldReturnFailure()
         {
             var userId = Guid.NewGuid();
             var courseId = Guid.NewGuid();
@@ -72,11 +75,11 @@ namespace TestProject2.Services
             var result = await _basketService.AddCourseToBasketAsync(userId, courseId);
 
             Assert.False(result.IsSuccess);
-            Assert.Contains("Course not found", result.ErrorMessage![0]);
+            Assert.Contains(CourseNotFoundMessage, result.ErrorMessage![0]);
         }
 
-        [Fact]
-        public async Task AddCourseToBasketAsync_ShouldSucceed_IfBasketExists()
+        [Fact, Trait("Method", "AddCourseToBasketAsync")]
+        public async Task AddCourseToBasketAsync_WhenBasketExists_ShouldAddCourse()
         {
             var userId = Guid.NewGuid();
             var courseId = Guid.NewGuid();
@@ -92,8 +95,8 @@ namespace TestProject2.Services
             _unitOfWorkMock.Verify(u => u.SaveChangesAsync(), Times.Once);
         }
 
-        [Fact]
-        public async Task AddCourseToBasketAsync_ShouldCreateBasket_IfNotExists()
+        [Fact, Trait("Method", "AddCourseToBasketAsync")]
+        public async Task AddCourseToBasketAsync_WhenBasketNotFound_ShouldCreateNewBasketAndAddCourse()
         {
             var userId = Guid.NewGuid();
             var courseId = Guid.NewGuid();
@@ -106,17 +109,16 @@ namespace TestProject2.Services
 
             Assert.True(result.IsSuccess);
             _basketRepoMock.Verify(r => r.InsertAsync(It.IsAny<Basket>()), Times.Once);
-            _unitOfWorkMock.Verify(u => u.SaveChangesAsync(), Times.Exactly(2)); // one for creating basket, one for adding course
+            _unitOfWorkMock.Verify(u => u.SaveChangesAsync(), Times.Exactly(2));
         }
 
-        [Fact]
-        public async Task ClearBasketAsync_ShouldCallClearMethods()
+        [Fact, Trait("Method", "ClearBasketAsync")]
+        public async Task ClearBasketAsync_WhenCalled_ShouldClearItems()
         {
             var userId = Guid.NewGuid();
             var course = CreateSampleCourse();
-
             var basket = new Basket(userId);
-            basket.AddCourse(course); // adds item so basket is not empty
+            basket.AddCourse(course);
 
             _basketRepoMock.Setup(r => r.GetBasketByUserIdAsync(userId)).ReturnsAsync(basket);
 
@@ -126,8 +128,8 @@ namespace TestProject2.Services
             _unitOfWorkMock.Verify(u => u.SaveChangesAsync(), Times.Once);
         }
 
-        [Fact]
-        public async Task CompleteBasketAsync_ShouldSetCompletedState()
+        [Fact, Trait("Method", "CompleteBasketAsync")]
+        public async Task CompleteBasketAsync_WhenItemsExist_ShouldSetCompletedStatus()
         {
             var userId = Guid.NewGuid();
             var course = CreateSampleCourse();
@@ -142,26 +144,24 @@ namespace TestProject2.Services
             _unitOfWorkMock.Verify(u => u.SaveChangesAsync(), Times.Once);
         }
 
-        [Fact]
-        public async Task RemoveCourseFromBasketAsync_ShouldRemoveCourse()
+        [Fact, Trait("Method", "RemoveCourseFromBasketAsync")]
+        public async Task RemoveCourseFromBasketAsync_WhenItemExists_ShouldRemoveCourse()
         {
             var userId = Guid.NewGuid();
-            var course = CreateSampleCourse(); // courseId is embedded inside
-
+            var course = CreateSampleCourse();
             var basket = new Basket(userId);
-            basket.AddCourse(course); // Add it to the basket first
+            basket.AddCourse(course);
 
             _basketRepoMock.Setup(r => r.GetBasketByUserIdAsync(userId)).ReturnsAsync(basket);
 
-            var result = await _basketService.RemoveCourseFromBasketAsync(userId, course.Id); // Use correct ID
+            var result = await _basketService.RemoveCourseFromBasketAsync(userId, course.Id);
 
             Assert.True(result.IsSuccess);
             _unitOfWorkMock.Verify(u => u.SaveChangesAsync(), Times.Once);
         }
 
-
-        [Fact]
-        public async Task GetBasketWithItemsAsync_ShouldReturnFail_IfNotFound()
+        [Fact, Trait("Method", "GetBasketWithItemsAsync")]
+        public async Task GetBasketWithItemsAsync_WhenNotFound_ShouldReturnFailure()
         {
             var basketId = Guid.NewGuid();
 
@@ -170,11 +170,11 @@ namespace TestProject2.Services
             var result = await _basketService.GetBasketWithItemsAsync(basketId);
 
             Assert.False(result.IsSuccess);
-            Assert.Contains("Basket not found", result.ErrorMessage![0]);
+            Assert.Contains(BasketNotFoundMessage, result.ErrorMessage![0]);
         }
 
-        [Fact]
-        public async Task GetBasketWithItemsAsync_ShouldReturnMappedDTO()
+        [Fact, Trait("Method", "GetBasketWithItemsAsync")]
+        public async Task GetBasketWithItemsAsync_WhenFound_ShouldReturnMappedDTO()
         {
             var basketId = Guid.NewGuid();
             var userId = Guid.NewGuid();
@@ -190,7 +190,7 @@ namespace TestProject2.Services
             Assert.Equal(dto, result.Data);
         }
 
-        private Course CreateSampleCourse()
+        private static Course CreateSampleCourse()
         {
             return new Course(
                 title: "Test Course",

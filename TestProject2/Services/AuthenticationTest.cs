@@ -13,7 +13,7 @@ using AutoMapper;
 using System.Collections.Generic;
 using System.Linq.Expressions;
 
-namespace TestProject2.Services
+namespace TestProject2.Xunit.Services
 {
     public class AuthenticationTest
     {
@@ -36,28 +36,34 @@ namespace TestProject2.Services
             );
         }
 
-        [Fact]
-        public async Task CreateTokenAsync_ShouldFail_IfLoginDtoIsNull()
+        private LoginDTO CreateLoginDTO(string email = "user@test.com", string password = "password")
+            => new(email, password);
+
+        private TokenDTO CreateTokenDTO()
+            => new("accessToken", DateTime.UtcNow.AddMinutes(10), "refreshToken", DateTime.UtcNow.AddDays(1));
+
+        [Fact, Trait("Category", "CreateToken")]
+        public async Task CreateTokenAsync_WhenLoginDtoIsNull_ShouldReturnFailure()
         {
             var result = await _authService.CreateTokenAsync(null);
             Assert.True(result.IsFailure);
+            Assert.Contains("Login information is required", result.ErrorMessage?[0] ?? "", StringComparison.OrdinalIgnoreCase);
         }
 
-        [Fact]
-        public async Task CreateTokenAsync_ShouldFail_IfUserNotFound()
+        [Fact, Trait("Category", "CreateToken")]
+        public async Task CreateTokenAsync_WhenUserNotFound_ShouldReturnFailure()
         {
             _userManagerMock.Setup(x => x.FindByEmailAsync(It.IsAny<string>()))
                 .ReturnsAsync((AppUser)null!);
 
-            var login = new LoginDTO("user@test.com", "password");
-            var result = await _authService.CreateTokenAsync(login);
+            var result = await _authService.CreateTokenAsync(CreateLoginDTO());
 
             Assert.True(result.IsFailure);
             Assert.Contains("Email or Password is wrong", result.ErrorMessage![0]);
         }
 
-        [Fact]
-        public async Task CreateTokenAsync_ShouldFail_IfPasswordIsIncorrect()
+        [Fact, Trait("Category", "CreateToken")]
+        public async Task CreateTokenAsync_WhenPasswordIncorrect_ShouldReturnFailure()
         {
             _userManagerMock.Setup(x => x.FindByEmailAsync(It.IsAny<string>()))
                 .ReturnsAsync(new AppUser());
@@ -65,18 +71,17 @@ namespace TestProject2.Services
             _userManagerMock.Setup(x => x.CheckPasswordAsync(It.IsAny<AppUser>(), It.IsAny<string>()))
                 .ReturnsAsync(false);
 
-            var login = new LoginDTO("user@test.com", "wrongpassword");
-            var result = await _authService.CreateTokenAsync(login);
+            var result = await _authService.CreateTokenAsync(CreateLoginDTO("user@test.com", "wrongPassword"));
 
             Assert.True(result.IsFailure);
             Assert.Contains("Email or Password is wrong", result.ErrorMessage![0]);
         }
 
-        [Fact]
-        public async Task CreateTokenAsync_ShouldReturnToken_IfLoginIsSuccessful()
+        [Fact, Trait("Category", "CreateToken")]
+        public async Task CreateTokenAsync_WhenCredentialsValid_ShouldReturnToken()
         {
             var user = new AppUser { Id = Guid.NewGuid() };
-            var token = new TokenDTO("accessToken", DateTime.UtcNow.AddMinutes(10), "refreshToken", DateTime.UtcNow.AddDays(1));
+            var token = CreateTokenDTO();
 
             _userManagerMock.Setup(x => x.FindByEmailAsync(It.IsAny<string>())).ReturnsAsync(user);
             _userManagerMock.Setup(x => x.CheckPasswordAsync(user, It.IsAny<string>())).ReturnsAsync(true);
@@ -86,15 +91,17 @@ namespace TestProject2.Services
             _mapperMock.Setup(x => x.Map<AppUserRefreshToken>(It.IsAny<AppUserRefreshTokenDTO>()))
                 .Returns(new AppUserRefreshToken());
 
-            var login = new LoginDTO("user@test.com", "correctPassword");
-            var result = await _authService.CreateTokenAsync(login);
+            var result = await _authService.CreateTokenAsync(CreateLoginDTO("user@test.com", "correctPassword"));
 
             Assert.True(result.IsSuccess);
-            Assert.Equal("accessToken", result.Data!.AccessToken);
+            Assert.Equal(token.AccessToken, result.Data!.AccessToken);
+
+            _userManagerMock.Verify(x => x.FindByEmailAsync("user@test.com"), Times.Once);
+            _tokenServiceMock.Verify(x => x.CreateToken(user), Times.Once);
         }
 
-        [Fact]
-        public async Task CreateTokenByRefreshToken_ShouldFail_IfTokenNotFound()
+        [Fact, Trait("Category", "RefreshToken")]
+        public async Task CreateTokenByRefreshToken_WhenTokenNotFound_ShouldReturnFailure()
         {
             _unitOfWorkMock.Setup(x => x.AppUserRefreshToken.GetAsync(It.IsAny<Expression<Func<AppUserRefreshToken, bool>>>()))
                 .ReturnsAsync((AppUserRefreshToken)null!);
@@ -105,12 +112,13 @@ namespace TestProject2.Services
             Assert.Contains("Refresh token not found", result.ErrorMessage![0]);
         }
 
-        [Fact]
-        public async Task CreateTokenByRefreshToken_ShouldFail_IfTokenExpired()
+        [Fact, Trait("Category", "RefreshToken")]
+        public async Task CreateTokenByRefreshToken_WhenTokenExpired_ShouldReturnFailure()
         {
-            var token = new AppUserRefreshToken { ExpiresAt = DateTime.UtcNow.AddMinutes(-5) };
+            var expiredToken = new AppUserRefreshToken { ExpiresAt = DateTime.UtcNow.AddMinutes(-5) };
+
             _unitOfWorkMock.Setup(x => x.AppUserRefreshToken.GetAsync(It.IsAny<Expression<Func<AppUserRefreshToken, bool>>>()))
-                .ReturnsAsync(token);
+                .ReturnsAsync(expiredToken);
 
             var result = await _authService.CreateTokenByRefreshToken("expiredToken");
 
@@ -118,26 +126,26 @@ namespace TestProject2.Services
             Assert.Contains("Refresh token is expired", result.ErrorMessage![0]);
         }
 
-        [Fact]
-        public async Task CreateTokenByRefreshToken_ShouldSucceed_IfTokenIsValid()
+        [Fact, Trait("Category", "RefreshToken")]
+        public async Task CreateTokenByRefreshToken_WhenTokenValid_ShouldReturnNewToken()
         {
             var user = new AppUser { Id = Guid.NewGuid() };
-            var refreshToken = new AppUserRefreshToken { UserId = user.Id, ExpiresAt = DateTime.UtcNow.AddMinutes(30) };
-            var token = new TokenDTO("access", DateTime.UtcNow.AddMinutes(10), "refresh", DateTime.UtcNow.AddDays(1));
+            var validToken = new AppUserRefreshToken { UserId = user.Id, ExpiresAt = DateTime.UtcNow.AddMinutes(30) };
+            var expectedToken = CreateTokenDTO();
 
             _unitOfWorkMock.Setup(x => x.AppUserRefreshToken.GetAsync(It.IsAny<Expression<Func<AppUserRefreshToken, bool>>>()))
-                .ReturnsAsync(refreshToken);
+                .ReturnsAsync(validToken);
             _userManagerMock.Setup(x => x.FindByIdAsync(user.Id.ToString())).ReturnsAsync(user);
-            _tokenServiceMock.Setup(x => x.CreateToken(user)).Returns(token);
+            _tokenServiceMock.Setup(x => x.CreateToken(user)).Returns(expectedToken);
 
             var result = await _authService.CreateTokenByRefreshToken("validToken");
 
             Assert.True(result.IsSuccess);
-            Assert.Equal("access", result.Data!.AccessToken);
+            Assert.Equal(expectedToken.AccessToken, result.Data!.AccessToken);
         }
 
-        [Fact]
-        public async Task RevokeRefreshToken_ShouldFail_IfTokenNotFound()
+        [Fact, Trait("Category", "RevokeToken")]
+        public async Task RevokeRefreshToken_WhenTokenNotFound_ShouldReturnFailure()
         {
             _unitOfWorkMock.Setup(x => x.AppUserRefreshToken.GetAsync(It.IsAny<Expression<Func<AppUserRefreshToken, bool>>>()))
                 .ReturnsAsync((AppUserRefreshToken)null!);
@@ -148,8 +156,8 @@ namespace TestProject2.Services
             Assert.Contains("Refresh token not found", result.ErrorMessage![0]);
         }
 
-        [Fact]
-        public async Task RevokeRefreshToken_ShouldSucceed_IfTokenExists()
+        [Fact, Trait("Category", "RevokeToken")]
+        public async Task RevokeRefreshToken_WhenTokenExists_ShouldSucceed()
         {
             var token = new AppUserRefreshToken { Token = "validToken" };
 
@@ -159,6 +167,7 @@ namespace TestProject2.Services
             var result = await _authService.RevokeRefreshToken("validToken");
 
             Assert.True(result.IsSuccess);
+            _unitOfWorkMock.Verify(x => x.AppUserRefreshToken.GetAsync(It.IsAny<Expression<Func<AppUserRefreshToken, bool>>>()), Times.Once);
         }
     }
 }

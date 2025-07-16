@@ -8802,9 +8802,9 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\Testing\\Desktop\\lds\\Dotnet\\TestProject2\\TestProject2.csproj",
-      "projectName": "TestProject2",
-      "projectPath": "C:\\Users\\Testing\\Desktop\\lds\\Dotnet\\TestProject2\\TestProject2.csproj",
+      "projectUniqueName": "C:\\Users\\Testing\\Desktop\\lds\\Dotnet\\TestProject2\\TestProject2.Xunit.csproj",
+      "projectName": "TestProject2.Xunit",
+      "projectPath": "C:\\Users\\Testing\\Desktop\\lds\\Dotnet\\TestProject2\\TestProject2.Xunit.csproj",
       "packagesPath": "C:\\Users\\Testing\\.nuget\\packages\\",
       "outputPath": "C:\\Users\\Testing\\Desktop\\lds\\Dotnet\\TestProject2\\obj\\",
       "projectStyle": "PackageReference",

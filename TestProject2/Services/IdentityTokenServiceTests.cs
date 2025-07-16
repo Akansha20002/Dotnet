@@ -14,7 +14,7 @@ using System.IdentityModel.Tokens.Jwt;
 using CourseTech.Core.DTOs.Authentication;
 using CourseTech.Shared;
 
-namespace TestProject2.Services
+namespace TestProject2.Xunit.Services
 {
     public class IdentityTokenServiceTests
     {

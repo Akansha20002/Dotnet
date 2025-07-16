@@ -8865,9 +8865,9 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\Testing\\Desktop\\lds\\Dotnet\\TestProject1\\TestProject1.csproj",
-      "projectName": "TestProject1",
-      "projectPath": "C:\\Users\\Testing\\Desktop\\lds\\Dotnet\\TestProject1\\TestProject1.csproj",
+      "projectUniqueName": "C:\\Users\\Testing\\Desktop\\lds\\Dotnet\\TestProject1\\TestProject1.Nunit.csproj",
+      "projectName": "TestProject1.Nunit",
+      "projectPath": "C:\\Users\\Testing\\Desktop\\lds\\Dotnet\\TestProject1\\TestProject1.Nunit.csproj",
       "packagesPath": "C:\\Users\\Testing\\.nuget\\packages\\",
       "outputPath": "C:\\Users\\Testing\\Desktop\\lds\\Dotnet\\TestProject1\\obj\\",
       "projectStyle": "PackageReference",

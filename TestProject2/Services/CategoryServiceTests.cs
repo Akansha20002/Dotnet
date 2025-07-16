@@ -12,7 +12,7 @@ using CourseTech.Service.Services;
 using CourseTech.Core.Repositories;
 using CourseTech.Shared;
 
-namespace TestProject2.Services
+namespace TestProject2.Xunit.Services
 {
     public class CategoryServiceTests
     {
@@ -21,14 +21,16 @@ namespace TestProject2.Services
         private readonly Mock<IMapper> _mapperMock = new();
         private readonly CategoryService _categoryService;
 
+        private const string CategoryNotFoundMessage = "not found";
+
         public CategoryServiceTests()
         {
             _unitOfWorkMock.Setup(x => x.Category).Returns(_categoryRepoMock.Object);
             _categoryService = new CategoryService(_unitOfWorkMock.Object, _mapperMock.Object);
         }
 
-        [Fact]
-        public async Task GetByIdAsync_ShouldReturnCategory_WhenCategoryExists()
+        [Fact, Trait("Method", "GetByIdAsync")]
+        public async Task GetByIdAsync_WhenCategoryExists_ShouldReturnMappedDto()
         {
             var categoryId = Guid.NewGuid();
             var category = new Category { Id = categoryId, Name = "Test Category" };
@@ -43,21 +45,20 @@ namespace TestProject2.Services
             Assert.Equal(categoryDto, result.Data);
         }
 
-        [Fact]
-        public async Task GetByIdAsync_ShouldReturnFail_WhenCategoryDoesNotExist()
+        [Fact, Trait("Method", "GetByIdAsync")]
+        public async Task GetByIdAsync_WhenCategoryDoesNotExist_ShouldReturnFailure()
         {
             var categoryId = Guid.NewGuid();
-            _categoryRepoMock.Setup(x => x.GetByIdAsync(categoryId))
-                             .ReturnsAsync((Category)null!); // Fix: Simulate not found
+            _categoryRepoMock.Setup(x => x.GetByIdAsync(categoryId)).ReturnsAsync((Category)null!);
 
             var result = await _categoryService.GetByIdAsync(categoryId);
 
             Assert.False(result.IsSuccess);
-            Assert.Contains("not found", result.ErrorMessage![0]);
+            Assert.Contains(CategoryNotFoundMessage, result.ErrorMessage![0]);
         }
 
-        [Fact]
-        public async Task GetAllAsync_ShouldReturnAllCategories()
+        [Fact, Trait("Method", "GetAllAsync")]
+        public async Task GetAllAsync_WhenCalled_ShouldReturnMappedDtoList()
         {
             var categories = new List<Category>
             {
@@ -80,8 +81,8 @@ namespace TestProject2.Services
             Assert.Equal(categoryDtos, result.Data);
         }
 
-        [Fact]
-        public async Task CreateAsync_ShouldCreateNewCategory()
+        [Fact, Trait("Method", "CreateAsync")]
+        public async Task CreateAsync_WhenCalled_ShouldInsertCategoryAndReturnDto()
         {
             var createDto = new CategoryCreateDTO("New Category");
             var category = new Category { Id = Guid.NewGuid(), Name = "New Category" };
@@ -99,8 +100,8 @@ namespace TestProject2.Services
             _unitOfWorkMock.Verify(x => x.SaveChangesAsync(), Times.Once);
         }
 
-        [Fact]
-        public async Task UpdateAsync_ShouldUpdateExistingCategory()
+        [Fact, Trait("Method", "UpdateAsync")]
+        public async Task UpdateAsync_WhenCategoryExists_ShouldUpdateAndReturnDto()
         {
             var categoryId = Guid.NewGuid();
             var updateDto = new CategoryUpdateDTO(categoryId, "Updated Category");
@@ -117,8 +118,8 @@ namespace TestProject2.Services
             _unitOfWorkMock.Verify(x => x.SaveChangesAsync(), Times.Once);
         }
 
-        [Fact]
-        public async Task SoftDeleteAsync_ShouldDeleteCategory()
+        [Fact, Trait("Method", "SoftDeleteAsync")]
+        public async Task SoftDeleteAsync_WhenCategoryExists_ShouldMarkDeletedAndSave()
         {
             var categoryId = Guid.NewGuid();
             var category = new Category { Id = categoryId, Name = "Category to Delete" };
@@ -128,7 +129,7 @@ namespace TestProject2.Services
             var result = await _categoryService.SoftDeleteAsync(categoryId);
 
             Assert.True(result.IsSuccess);
-            _categoryRepoMock.Verify(x => x.Update(category), Times.Once); // ? Corrected
+            _categoryRepoMock.Verify(x => x.Update(category), Times.Once);
             _unitOfWorkMock.Verify(x => x.SaveChangesAsync(), Times.Once);
         }
     }

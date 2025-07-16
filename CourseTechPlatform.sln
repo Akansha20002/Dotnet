@@ -13,9 +13,9 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CourseTech.Service", "Cours
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CourseTech.Shared", "CourseTech.Shared\CourseTech.Shared.csproj", "{4B59FCD5-AA82-4BD8-BC35-869146286102}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TestProject1", "TestProject1\TestProject1.csproj", "{7E3B0DB9-5035-4827-A50D-F0547F24153E}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TestProject1.Nunit", "TestProject1\TestProject1.Nunit.csproj", "{7E3B0DB9-5035-4827-A50D-F0547F24153E}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TestProject2", "TestProject2\TestProject2.csproj", "{C344453B-E212-49EB-982F-7E3BA8829BC4}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TestProject2.Xunit", "TestProject2\TestProject2.Xunit.csproj", "{C344453B-E212-49EB-982F-7E3BA8829BC4}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
