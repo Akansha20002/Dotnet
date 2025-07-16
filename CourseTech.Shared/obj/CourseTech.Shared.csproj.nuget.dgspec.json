@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\Testing\\Desktop\\Dotnet\\CourseTech.Shared\\CourseTech.Shared.csproj": {}
+    "C:\\Users\\Testing\\Desktop\\lds\\Dotnet\\CourseTech.Shared\\CourseTech.Shared.csproj": {}
   },
   "projects": {
-    "C:\\Users\\Testing\\Desktop\\Dotnet\\CourseTech.Shared\\CourseTech.Shared.csproj": {
+    "C:\\Users\\Testing\\Desktop\\lds\\Dotnet\\CourseTech.Shared\\CourseTech.Shared.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\Testing\\Desktop\\Dotnet\\CourseTech.Shared\\CourseTech.Shared.csproj",
+        "projectUniqueName": "C:\\Users\\Testing\\Desktop\\lds\\Dotnet\\CourseTech.Shared\\CourseTech.Shared.csproj",
         "projectName": "CourseTech.Shared",
-        "projectPath": "C:\\Users\\Testing\\Desktop\\Dotnet\\CourseTech.Shared\\CourseTech.Shared.csproj",
+        "projectPath": "C:\\Users\\Testing\\Desktop\\lds\\Dotnet\\CourseTech.Shared\\CourseTech.Shared.csproj",
         "packagesPath": "C:\\Users\\Testing\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\Testing\\Desktop\\Dotnet\\CourseTech.Shared\\obj\\",
+        "outputPath": "C:\\Users\\Testing\\Desktop\\lds\\Dotnet\\CourseTech.Shared\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
           "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"

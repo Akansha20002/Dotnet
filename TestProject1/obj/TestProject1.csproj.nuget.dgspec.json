@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\Testing\\Desktop\\Dotnet\\TestProject1\\TestProject1.csproj": {}
+    "C:\\Users\\Testing\\Desktop\\lds\\Dotnet\\TestProject1\\TestProject1.csproj": {}
   },
   "projects": {
-    "C:\\Users\\Testing\\Desktop\\Dotnet\\CourseTech.API\\CourseTech.API.csproj": {
+    "C:\\Users\\Testing\\Desktop\\lds\\Dotnet\\CourseTech.API\\CourseTech.API.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\Testing\\Desktop\\Dotnet\\CourseTech.API\\CourseTech.API.csproj",
+        "projectUniqueName": "C:\\Users\\Testing\\Desktop\\lds\\Dotnet\\CourseTech.API\\CourseTech.API.csproj",
         "projectName": "CourseTech.API",
-        "projectPath": "C:\\Users\\Testing\\Desktop\\Dotnet\\CourseTech.API\\CourseTech.API.csproj",
+        "projectPath": "C:\\Users\\Testing\\Desktop\\lds\\Dotnet\\CourseTech.API\\CourseTech.API.csproj",
         "packagesPath": "C:\\Users\\Testing\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\Testing\\Desktop\\Dotnet\\CourseTech.API\\obj\\",
+        "outputPath": "C:\\Users\\Testing\\Desktop\\lds\\Dotnet\\CourseTech.API\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
           "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
@@ -32,8 +32,8 @@
           "net9.0": {
             "targetAlias": "net9.0",
             "projectReferences": {
-              "C:\\Users\\Testing\\Desktop\\Dotnet\\CourseTech.Service\\CourseTech.Service.csproj": {
-                "projectPath": "C:\\Users\\Testing\\Desktop\\Dotnet\\CourseTech.Service\\CourseTech.Service.csproj"
+              "C:\\Users\\Testing\\Desktop\\lds\\Dotnet\\CourseTech.Service\\CourseTech.Service.csproj": {
+                "projectPath": "C:\\Users\\Testing\\Desktop\\lds\\Dotnet\\CourseTech.Service\\CourseTech.Service.csproj"
               }
             }
           }
@@ -122,14 +122,14 @@
         }
       }
     },
-    "C:\\Users\\Testing\\Desktop\\Dotnet\\CourseTech.Core\\CourseTech.Core.csproj": {
+    "C:\\Users\\Testing\\Desktop\\lds\\Dotnet\\CourseTech.Core\\CourseTech.Core.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\Testing\\Desktop\\Dotnet\\CourseTech.Core\\CourseTech.Core.csproj",
+        "projectUniqueName": "C:\\Users\\Testing\\Desktop\\lds\\Dotnet\\CourseTech.Core\\CourseTech.Core.csproj",
         "projectName": "CourseTech.Core",
-        "projectPath": "C:\\Users\\Testing\\Desktop\\Dotnet\\CourseTech.Core\\CourseTech.Core.csproj",
+        "projectPath": "C:\\Users\\Testing\\Desktop\\lds\\Dotnet\\CourseTech.Core\\CourseTech.Core.csproj",
         "packagesPath": "C:\\Users\\Testing\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\Testing\\Desktop\\Dotnet\\CourseTech.Core\\obj\\",
+        "outputPath": "C:\\Users\\Testing\\Desktop\\lds\\Dotnet\\CourseTech.Core\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
           "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
@@ -150,8 +150,8 @@
           "net9.0": {
             "targetAlias": "net9.0",
             "projectReferences": {
-              "C:\\Users\\Testing\\Desktop\\Dotnet\\CourseTech.Shared\\CourseTech.Shared.csproj": {
-                "projectPath": "C:\\Users\\Testing\\Desktop\\Dotnet\\CourseTech.Shared\\CourseTech.Shared.csproj"
+              "C:\\Users\\Testing\\Desktop\\lds\\Dotnet\\CourseTech.Shared\\CourseTech.Shared.csproj": {
+                "projectPath": "C:\\Users\\Testing\\Desktop\\lds\\Dotnet\\CourseTech.Shared\\CourseTech.Shared.csproj"
               }
             }
           }
@@ -197,14 +197,14 @@
         }
       }
     },
-    "C:\\Users\\Testing\\Desktop\\Dotnet\\CourseTech.Repository\\CourseTech.Repository.csproj": {
+    "C:\\Users\\Testing\\Desktop\\lds\\Dotnet\\CourseTech.Repository\\CourseTech.Repository.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\Testing\\Desktop\\Dotnet\\CourseTech.Repository\\CourseTech.Repository.csproj",
+        "projectUniqueName": "C:\\Users\\Testing\\Desktop\\lds\\Dotnet\\CourseTech.Repository\\CourseTech.Repository.csproj",
         "projectName": "CourseTech.Repository",
-        "projectPath": "C:\\Users\\Testing\\Desktop\\Dotnet\\CourseTech.Repository\\CourseTech.Repository.csproj",
+        "projectPath": "C:\\Users\\Testing\\Desktop\\lds\\Dotnet\\CourseTech.Repository\\CourseTech.Repository.csproj",
         "packagesPath": "C:\\Users\\Testing\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\Testing\\Desktop\\Dotnet\\CourseTech.Repository\\obj\\",
+        "outputPath": "C:\\Users\\Testing\\Desktop\\lds\\Dotnet\\CourseTech.Repository\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
           "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
@@ -225,8 +225,8 @@
           "net9.0": {
             "targetAlias": "net9.0",
             "projectReferences": {
-              "C:\\Users\\Testing\\Desktop\\Dotnet\\CourseTech.Core\\CourseTech.Core.csproj": {
-                "projectPath": "C:\\Users\\Testing\\Desktop\\Dotnet\\CourseTech.Core\\CourseTech.Core.csproj"
+              "C:\\Users\\Testing\\Desktop\\lds\\Dotnet\\CourseTech.Core\\CourseTech.Core.csproj": {
+                "projectPath": "C:\\Users\\Testing\\Desktop\\lds\\Dotnet\\CourseTech.Core\\CourseTech.Core.csproj"
               }
             }
           }
@@ -282,14 +282,14 @@
         }
       }
     },
-    "C:\\Users\\Testing\\Desktop\\Dotnet\\CourseTech.Service\\CourseTech.Service.csproj": {
+    "C:\\Users\\Testing\\Desktop\\lds\\Dotnet\\CourseTech.Service\\CourseTech.Service.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\Testing\\Desktop\\Dotnet\\CourseTech.Service\\CourseTech.Service.csproj",
+        "projectUniqueName": "C:\\Users\\Testing\\Desktop\\lds\\Dotnet\\CourseTech.Service\\CourseTech.Service.csproj",
         "projectName": "CourseTech.Service",
-        "projectPath": "C:\\Users\\Testing\\Desktop\\Dotnet\\CourseTech.Service\\CourseTech.Service.csproj",
+        "projectPath": "C:\\Users\\Testing\\Desktop\\lds\\Dotnet\\CourseTech.Service\\CourseTech.Service.csproj",
         "packagesPath": "C:\\Users\\Testing\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\Testing\\Desktop\\Dotnet\\CourseTech.Service\\obj\\",
+        "outputPath": "C:\\Users\\Testing\\Desktop\\lds\\Dotnet\\CourseTech.Service\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
           "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
@@ -310,8 +310,8 @@
           "net9.0": {
             "targetAlias": "net9.0",
             "projectReferences": {
-              "C:\\Users\\Testing\\Desktop\\Dotnet\\CourseTech.Repository\\CourseTech.Repository.csproj": {
-                "projectPath": "C:\\Users\\Testing\\Desktop\\Dotnet\\CourseTech.Repository\\CourseTech.Repository.csproj"
+              "C:\\Users\\Testing\\Desktop\\lds\\Dotnet\\CourseTech.Repository\\CourseTech.Repository.csproj": {
+                "projectPath": "C:\\Users\\Testing\\Desktop\\lds\\Dotnet\\CourseTech.Repository\\CourseTech.Repository.csproj"
               }
             }
           }
@@ -357,14 +357,14 @@
         }
       }
     },
-    "C:\\Users\\Testing\\Desktop\\Dotnet\\CourseTech.Shared\\CourseTech.Shared.csproj": {
+    "C:\\Users\\Testing\\Desktop\\lds\\Dotnet\\CourseTech.Shared\\CourseTech.Shared.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\Testing\\Desktop\\Dotnet\\CourseTech.Shared\\CourseTech.Shared.csproj",
+        "projectUniqueName": "C:\\Users\\Testing\\Desktop\\lds\\Dotnet\\CourseTech.Shared\\CourseTech.Shared.csproj",
         "projectName": "CourseTech.Shared",
-        "projectPath": "C:\\Users\\Testing\\Desktop\\Dotnet\\CourseTech.Shared\\CourseTech.Shared.csproj",
+        "projectPath": "C:\\Users\\Testing\\Desktop\\lds\\Dotnet\\CourseTech.Shared\\CourseTech.Shared.csproj",
         "packagesPath": "C:\\Users\\Testing\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\Testing\\Desktop\\Dotnet\\CourseTech.Shared\\obj\\",
+        "outputPath": "C:\\Users\\Testing\\Desktop\\lds\\Dotnet\\CourseTech.Shared\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
           "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
@@ -432,14 +432,14 @@
         }
       }
     },
-    "C:\\Users\\Testing\\Desktop\\Dotnet\\TestProject1\\TestProject1.csproj": {
+    "C:\\Users\\Testing\\Desktop\\lds\\Dotnet\\TestProject1\\TestProject1.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\Testing\\Desktop\\Dotnet\\TestProject1\\TestProject1.csproj",
+        "projectUniqueName": "C:\\Users\\Testing\\Desktop\\lds\\Dotnet\\TestProject1\\TestProject1.csproj",
         "projectName": "TestProject1",
-        "projectPath": "C:\\Users\\Testing\\Desktop\\Dotnet\\TestProject1\\TestProject1.csproj",
+        "projectPath": "C:\\Users\\Testing\\Desktop\\lds\\Dotnet\\TestProject1\\TestProject1.csproj",
         "packagesPath": "C:\\Users\\Testing\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\Testing\\Desktop\\Dotnet\\TestProject1\\obj\\",
+        "outputPath": "C:\\Users\\Testing\\Desktop\\lds\\Dotnet\\TestProject1\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
           "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
@@ -460,20 +460,20 @@
           "net9.0": {
             "targetAlias": "net9.0",
             "projectReferences": {
-              "C:\\Users\\Testing\\Desktop\\Dotnet\\CourseTech.API\\CourseTech.API.csproj": {
-                "projectPath": "C:\\Users\\Testing\\Desktop\\Dotnet\\CourseTech.API\\CourseTech.API.csproj"
+              "C:\\Users\\Testing\\Desktop\\lds\\Dotnet\\CourseTech.API\\CourseTech.API.csproj": {
+                "projectPath": "C:\\Users\\Testing\\Desktop\\lds\\Dotnet\\CourseTech.API\\CourseTech.API.csproj"
               },
-              "C:\\Users\\Testing\\Desktop\\Dotnet\\CourseTech.Core\\CourseTech.Core.csproj": {
-                "projectPath": "C:\\Users\\Testing\\Desktop\\Dotnet\\CourseTech.Core\\CourseTech.Core.csproj"
+              "C:\\Users\\Testing\\Desktop\\lds\\Dotnet\\CourseTech.Core\\CourseTech.Core.csproj": {
+                "projectPath": "C:\\Users\\Testing\\Desktop\\lds\\Dotnet\\CourseTech.Core\\CourseTech.Core.csproj"
               },
-              "C:\\Users\\Testing\\Desktop\\Dotnet\\CourseTech.Repository\\CourseTech.Repository.csproj": {
-                "projectPath": "C:\\Users\\Testing\\Desktop\\Dotnet\\CourseTech.Repository\\CourseTech.Repository.csproj"
+              "C:\\Users\\Testing\\Desktop\\lds\\Dotnet\\CourseTech.Repository\\CourseTech.Repository.csproj": {
+                "projectPath": "C:\\Users\\Testing\\Desktop\\lds\\Dotnet\\CourseTech.Repository\\CourseTech.Repository.csproj"
               },
-              "C:\\Users\\Testing\\Desktop\\Dotnet\\CourseTech.Service\\CourseTech.Service.csproj": {
-                "projectPath": "C:\\Users\\Testing\\Desktop\\Dotnet\\CourseTech.Service\\CourseTech.Service.csproj"
+              "C:\\Users\\Testing\\Desktop\\lds\\Dotnet\\CourseTech.Service\\CourseTech.Service.csproj": {
+                "projectPath": "C:\\Users\\Testing\\Desktop\\lds\\Dotnet\\CourseTech.Service\\CourseTech.Service.csproj"
               },
-              "C:\\Users\\Testing\\Desktop\\Dotnet\\CourseTech.Shared\\CourseTech.Shared.csproj": {
-                "projectPath": "C:\\Users\\Testing\\Desktop\\Dotnet\\CourseTech.Shared\\CourseTech.Shared.csproj"
+              "C:\\Users\\Testing\\Desktop\\lds\\Dotnet\\CourseTech.Shared\\CourseTech.Shared.csproj": {
+                "projectPath": "C:\\Users\\Testing\\Desktop\\lds\\Dotnet\\CourseTech.Shared\\CourseTech.Shared.csproj"
               }
             }
           }

@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "1NsG0ioAF7A=",
+  "dgSpecHash": "63KiMn3vZgk=",
   "success": true,
-  "projectFilePath": "C:\\Users\\Testing\\Desktop\\Dotnet\\CourseTech.Shared\\CourseTech.Shared.csproj",
+  "projectFilePath": "C:\\Users\\Testing\\Desktop\\lds\\Dotnet\\CourseTech.Shared\\CourseTech.Shared.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\Testing\\.nuget\\packages\\microsoft.csharp\\4.5.0\\microsoft.csharp.4.5.0.nupkg.sha512",
     "C:\\Users\\Testing\\.nuget\\packages\\microsoft.extensions.dependencyinjection.abstractions\\9.0.0\\microsoft.extensions.dependencyinjection.abstractions.9.0.0.nupkg.sha512",

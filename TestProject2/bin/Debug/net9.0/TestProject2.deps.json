@@ -15,7 +15,7 @@
           "CourseTech.Shared": "1.0.0",
           "Microsoft.NET.Test.Sdk": "17.12.0",
           "Moq": "4.18.4",
-          "coverlet.collector": "6.0.2",
+          "ReportGenerator": "5.4.8",
           "xunit": "2.9.2",
           "xunit.runner.visualstudio": "2.8.2"
         },
@@ -80,7 +80,6 @@
           }
         }
       },
-      "coverlet.collector/6.0.2": {},
       "FluentValidation/11.11.0": {
         "runtime": {
           "lib/net8.0/FluentValidation.dll": {
@@ -2060,6 +2059,7 @@
           }
         }
       },
+      "ReportGenerator/5.4.8": {},
       "Scalar.AspNetCore/1.2.72": {
         "runtime": {
           "lib/net9.0/Scalar.AspNetCore.dll": {
@@ -2444,13 +2444,6 @@
       "sha512": "sha512-rpYtIczkzGpf+EkZgDr9CClTdemhsrwA/W5hMoPjLkRFnXzH44zDLoovXeKtmxb1ykXK9aJVODSpiJml8CTw2g==",
       "path": "castle.core/5.1.1",
       "hashPath": "castle.core.5.1.1.nupkg.sha512"
-    },
-    "coverlet.collector/6.0.2": {
-      "type": "package",
-      "serviceable": true,
-      "sha512": "sha512-bJShQ6uWRTQ100ZeyiMqcFlhP7WJ+bCuabUs885dJiBEzMsJMSFr7BOyeCw4rgvQokteGi5rKQTlkhfQPUXg2A==",
-      "path": "coverlet.collector/6.0.2",
-      "hashPath": "coverlet.collector.6.0.2.nupkg.sha512"
     },
     "FluentValidation/11.11.0": {
       "type": "package",
@@ -3340,6 +3333,13 @@
       "sha512": "sha512-v/GGlIj2dd7svplFmASWEueu62veKW0MrMtBaZ7QG8aJTSGv2yE+pgUGhXRcQ4nxNOEq/wLBrz1vkth/1SND7A==",
       "path": "nuget.versioning/6.11.0",
       "hashPath": "nuget.versioning.6.11.0.nupkg.sha512"
+    },
+    "ReportGenerator/5.4.8": {
+      "type": "package",
+      "serviceable": true,
+      "sha512": "sha512-06VEqqUkepZRBOBBWzAWRpt2flLcqHZOjPuolYzBky6q+g3OsxyBLV7Wy6LTeGuQwbYDHoHmr1kGYLAxc1Qaqw==",
+      "path": "reportgenerator/5.4.8",
+      "hashPath": "reportgenerator.5.4.8.nupkg.sha512"
     },
     "Scalar.AspNetCore/1.2.72": {
       "type": "package",

@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "9bHHcbSO7UM=",
+  "dgSpecHash": "onHM53r6ZTI=",
   "success": true,
-  "projectFilePath": "C:\\Users\\Testing\\Desktop\\Dotnet\\CourseTech.API\\CourseTech.API.csproj",
+  "projectFilePath": "C:\\Users\\Testing\\Desktop\\lds\\Dotnet\\CourseTech.API\\CourseTech.API.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\Testing\\.nuget\\packages\\automapper\\13.0.1\\automapper.13.0.1.nupkg.sha512",
     "C:\\Users\\Testing\\.nuget\\packages\\azure.core\\1.38.0\\azure.core.1.38.0.nupkg.sha512",
