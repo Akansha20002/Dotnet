@@ -22,6 +22,7 @@ namespace TestProject2.Xunit.Services
         private readonly CategoryService _categoryService;
 
         private const string CategoryNotFoundMessage = "not found";
+        private const string DefaultCategoryName = "Test Category";
 
         public CategoryServiceTests()
         {
@@ -33,11 +34,11 @@ namespace TestProject2.Xunit.Services
         public async Task GetByIdAsync_WhenCategoryExists_ShouldReturnMappedDto()
         {
             var categoryId = Guid.NewGuid();
-            var category = new Category { Id = categoryId, Name = "Test Category" };
-            var categoryDto = new CategoryDTO(categoryId, "Test Category");
+            var category = CreateCategory(categoryId);
+            var categoryDto = CreateCategoryDTO(categoryId);
 
-            _categoryRepoMock.Setup(x => x.GetByIdAsync(categoryId)).ReturnsAsync(category);
-            _mapperMock.Setup(x => x.Map<CategoryDTO>(category)).Returns(categoryDto);
+            SetupGetById(categoryId, category);
+            SetupMapToDTO(category, categoryDto);
 
             var result = await _categoryService.GetByIdAsync(categoryId);
 
@@ -62,14 +63,14 @@ namespace TestProject2.Xunit.Services
         {
             var categories = new List<Category>
             {
-                new Category { Id = Guid.NewGuid(), Name = "Category 1" },
-                new Category { Id = Guid.NewGuid(), Name = "Category 2" }
+                CreateCategory(Guid.NewGuid(), "Category 1"),
+                CreateCategory(Guid.NewGuid(), "Category 2")
             };
 
             var categoryDtos = new List<CategoryDTO>
             {
-                new CategoryDTO(categories[0].Id, "Category 1"),
-                new CategoryDTO(categories[1].Id, "Category 2")
+                CreateCategoryDTO(categories[0].Id, "Category 1"),
+                CreateCategoryDTO(categories[1].Id, "Category 2")
             };
 
             _categoryRepoMock.Setup(x => x.GetAllAsync()).ReturnsAsync(categories);
@@ -85,12 +86,12 @@ namespace TestProject2.Xunit.Services
         public async Task CreateAsync_WhenCalled_ShouldInsertCategoryAndReturnDto()
         {
             var createDto = new CategoryCreateDTO("New Category");
-            var category = new Category { Id = Guid.NewGuid(), Name = "New Category" };
-            var categoryDto = new CategoryDTO(category.Id, "New Category");
+            var category = CreateCategory(Guid.NewGuid(), "New Category");
+            var categoryDto = CreateCategoryDTO(category.Id, "New Category");
 
             _mapperMock.Setup(x => x.Map<Category>(createDto)).Returns(category);
             _categoryRepoMock.Setup(x => x.InsertAsync(category)).Returns(Task.CompletedTask);
-            _mapperMock.Setup(x => x.Map<CategoryDTO>(category)).Returns(categoryDto);
+            SetupMapToDTO(category, categoryDto);
 
             var result = await _categoryService.CreateAsync(createDto);
 
@@ -105,16 +106,16 @@ namespace TestProject2.Xunit.Services
         {
             var categoryId = Guid.NewGuid();
             var updateDto = new CategoryUpdateDTO(categoryId, "Updated Category");
-            var existingCategory = new Category { Id = categoryId, Name = "Original Category" };
-            var updatedCategoryDto = new CategoryDTO(categoryId, "Updated Category");
+            var category = CreateCategory(categoryId, "Original Category");
+            var updatedDto = CreateCategoryDTO(categoryId, "Updated Category");
 
-            _categoryRepoMock.Setup(x => x.GetByIdAsync(updateDto.Id)).ReturnsAsync(existingCategory);
-            _mapperMock.Setup(x => x.Map<CategoryDTO>(existingCategory)).Returns(updatedCategoryDto);
+            SetupGetById(updateDto.Id, category);
+            SetupMapToDTO(category, updatedDto);
 
             var result = await _categoryService.UpdateAsync(updateDto);
 
             Assert.True(result.IsSuccess);
-            Assert.Equal(updatedCategoryDto, result.Data);
+            Assert.Equal(updatedDto, result.Data);
             _unitOfWorkMock.Verify(x => x.SaveChangesAsync(), Times.Once);
         }
 
@@ -122,9 +123,9 @@ namespace TestProject2.Xunit.Services
         public async Task SoftDeleteAsync_WhenCategoryExists_ShouldMarkDeletedAndSave()
         {
             var categoryId = Guid.NewGuid();
-            var category = new Category { Id = categoryId, Name = "Category to Delete" };
+            var category = CreateCategory(categoryId, "To Delete");
 
-            _categoryRepoMock.Setup(x => x.GetByIdAsync(categoryId)).ReturnsAsync(category);
+            SetupGetById(categoryId, category);
 
             var result = await _categoryService.SoftDeleteAsync(categoryId);
 
@@ -132,5 +133,19 @@ namespace TestProject2.Xunit.Services
             _categoryRepoMock.Verify(x => x.Update(category), Times.Once);
             _unitOfWorkMock.Verify(x => x.SaveChangesAsync(), Times.Once);
         }
+
+        // -------------------- Helper Methods --------------------
+
+        private Category CreateCategory(Guid? id = null, string name = DefaultCategoryName)
+            => new Category { Id = id ?? Guid.NewGuid(), Name = name };
+
+        private CategoryDTO CreateCategoryDTO(Guid id, string name = DefaultCategoryName)
+            => new CategoryDTO(id, name);
+
+        private void SetupMapToDTO(Category category, CategoryDTO dto)
+            => _mapperMock.Setup(x => x.Map<CategoryDTO>(category)).Returns(dto);
+
+        private void SetupGetById(Guid id, Category category)
+            => _categoryRepoMock.Setup(x => x.GetByIdAsync(id)).ReturnsAsync(category);
     }
 }

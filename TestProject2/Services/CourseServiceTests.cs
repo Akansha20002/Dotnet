@@ -33,18 +33,12 @@ namespace TestProject2.Xunit.Services
         {
             // Arrange
             var courseId = Guid.NewGuid();
-            var course = new Course("Test Course", "Description", "image.jpg", "video.mp4", 
-                CourseLevel.Beginner, CourseLanguage.English, 99.99m, TimeSpan.FromHours(2), 
-                Guid.NewGuid(), Guid.NewGuid());
-
-            var courseDto = new CourseDTO(courseId, "Test Course", "Description", "image.jpg", 
-                "video.mp4", "Beginner", "English", 99.99m, TimeSpan.FromHours(2), 
-                null, "Instructor Name", "Category Name", DateTime.UtcNow);
+            var course = CreateTestCourse();
+            var courseDto = CreateTestCourseDto(courseId);
 
             _unitOfWorkMock.Setup(x => x.Course.GetByIdAsync(courseId))
                 .ReturnsAsync(course);
-            _mapperMock.Setup(x => x.Map<CourseDTO>(course))
-                .Returns(courseDto);
+            SetupMapperForCourseDTO(course, courseDto);
 
             // Act
             var result = await _courseService.GetByIdAsync(courseId);
@@ -54,38 +48,28 @@ namespace TestProject2.Xunit.Services
             Assert.Equal(courseDto, result.Data);
         }
 
-       
         [Fact]
         public async Task GetPublishedCoursesAsync_ShouldReturnOnlyPublishedCourses()
         {
             // Arrange
             var courses = new List<Course>
             {
-                new Course("Course 1", "Description 1", "image1.jpg", "video1.mp4", 
-                    CourseLevel.Beginner, CourseLanguage.English, 99.99m, TimeSpan.FromHours(2), 
-                    Guid.NewGuid(), Guid.NewGuid()),
-                new Course("Course 2", "Description 2", "image2.jpg", "video2.mp4", 
-                    CourseLevel.Intermediate, CourseLanguage.Turkish, 149.99m, TimeSpan.FromHours(3), 
-                    Guid.NewGuid(), Guid.NewGuid())
+                CreateTestCourse("Course 1", "Description 1", CourseLevel.Beginner, CourseLanguage.English),
+                CreateTestCourse("Course 2", "Description 2", CourseLevel.Intermediate, CourseLanguage.Turkish)
             };
 
             foreach (var course in courses)
-            {
                 course.Publish();
-            }
 
             var courseDtos = new List<CourseDTO>
             {
-                new CourseDTO(Guid.NewGuid(), "Course 1", "Description 1", "image1.jpg", "video1.mp4", 
-                    "Beginner", "English", 99.99m, TimeSpan.FromHours(2), DateTime.UtcNow, "Instructor 1", "Category 1", DateTime.UtcNow),
-                new CourseDTO(Guid.NewGuid(), "Course 2", "Description 2", "image2.jpg", "video2.mp4", 
-                    "Intermediate", "Turkish", 149.99m, TimeSpan.FromHours(3), DateTime.UtcNow, "Instructor 2", "Category 2", DateTime.UtcNow)
+                CreateTestCourseDto(Guid.NewGuid(), "Course 1", "Description 1", "Beginner", "English", "Instructor 1", "Category 1"),
+                CreateTestCourseDto(Guid.NewGuid(), "Course 2", "Description 2", "Intermediate", "Turkish", "Instructor 2", "Category 2")
             };
 
             _unitOfWorkMock.Setup(x => x.Course.GetPublishedCoursesAsync())
                 .ReturnsAsync(courses);
-            _mapperMock.Setup(x => x.Map<IEnumerable<CourseDTO>>(courses))
-                .Returns(courseDtos);
+            SetupMapperForCourseDTOList(courses, courseDtos);
 
             // Act
             var result = await _courseService.GetPublishedCoursesAsync();
@@ -95,15 +79,12 @@ namespace TestProject2.Xunit.Services
             Assert.Equal(courseDtos, result.Data);
         }
 
-        
         [Fact]
         public async Task PublishCourseAsync_ShouldPublishCourse()
         {
             // Arrange
             var courseId = Guid.NewGuid();
-            var course = new Course("Test Course", "Description", "image.jpg", "video.mp4", 
-                CourseLevel.Beginner, CourseLanguage.English, 99.99m, TimeSpan.FromHours(2), 
-                Guid.NewGuid(), Guid.NewGuid());
+            var course = CreateTestCourse();
 
             _unitOfWorkMock.Setup(x => x.Course.GetByIdAsync(courseId))
                 .ReturnsAsync(course);
@@ -122,10 +103,8 @@ namespace TestProject2.Xunit.Services
         {
             // Arrange
             var courseId = Guid.NewGuid();
-            var course = new Course("Test Course", "Description", "image.jpg", "video.mp4", 
-                CourseLevel.Beginner, CourseLanguage.English, 99.99m, TimeSpan.FromHours(2), 
-                Guid.NewGuid(), Guid.NewGuid());
-            course.Publish(); // Make it published first
+            var course = CreateTestCourse();
+            course.Publish(); // initially published
 
             _unitOfWorkMock.Setup(x => x.Course.GetByIdAsync(courseId))
                 .ReturnsAsync(course);
@@ -137,6 +116,56 @@ namespace TestProject2.Xunit.Services
             Assert.True(result.IsSuccess);
             Assert.False(course.IsPublished);
             _unitOfWorkMock.Verify(x => x.SaveChangesAsync(), Times.Once);
+        }
+
+        // -------------------- Helper Methods --------------------
+
+        private Course CreateTestCourse(string title = "Test Course", string description = "Description",
+            CourseLevel level = CourseLevel.Beginner, CourseLanguage language = CourseLanguage.English)
+        {
+            return new Course(
+                title,
+                description,
+                "image.jpg",
+                "video.mp4",
+                level,
+                language,
+                99.99m,
+                TimeSpan.FromHours(2),
+                Guid.NewGuid(),
+                Guid.NewGuid()
+            );
+        }
+
+        private CourseDTO CreateTestCourseDto(Guid id, string title = "Test Course", string description = "Description",
+            string level = "Beginner", string language = "English",
+            string instructorName = "Instructor Name", string categoryName = "Category Name")
+        {
+            return new CourseDTO(
+                id,
+                title,
+                description,
+                "image.jpg",
+                "video.mp4",
+                level,
+                language,
+                99.99m,
+                TimeSpan.FromHours(2),
+                DateTime.UtcNow,
+                instructorName,
+                categoryName,
+                DateTime.UtcNow
+            );
+        }
+
+        private void SetupMapperForCourseDTO(Course course, CourseDTO dto)
+        {
+            _mapperMock.Setup(x => x.Map<CourseDTO>(course)).Returns(dto);
+        }
+
+        private void SetupMapperForCourseDTOList(IEnumerable<Course> courses, IEnumerable<CourseDTO> dtos)
+        {
+            _mapperMock.Setup(x => x.Map<IEnumerable<CourseDTO>>(courses)).Returns(dtos);
         }
     }
 }
